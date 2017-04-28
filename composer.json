@@ -1,7 +1,7 @@
 {
   "name": "hgiasac/yii2-bulma",
   "description": "Yii2 HTML widgets using bulma css framework",
-  // package type
+
   "type": "yii2-extension",
   "keywords": ["yii2", "bulma", "widget"],
   "authors": [{
@@ -13,7 +13,7 @@
   },
   "autoload": {
     "psr-4": {
-      "yii\\imagine\\": ""
+      "yii\\bulma\\": ""
     }
   }
 }
