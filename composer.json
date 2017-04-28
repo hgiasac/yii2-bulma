@@ -1,0 +1,19 @@
+{
+  "name": "hgiasac/yii2-bulma",
+  "description": "Yii2 HTML widgets using bulma css framework",
+  // package type
+  "type": "yii2-extension",
+  "keywords": ["yii2", "bulma", "widget"],
+  "authors": [{
+    "name": "Toan Nguyen",
+    "email": "hgiasac@gmail.com"
+  }],
+  "require": {
+    "yiisoft/yii2": "~2.0.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "yii\\imagine\\": ""
+    }
+  }
+}
