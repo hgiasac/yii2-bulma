@@ -7,7 +7,7 @@ namespace bulma\widgets;
  * For more details and usage information on ActiveForm, see the [guide article on forms](guide:input-forms).
  *
  */
-class ActiveForm extends yii\widgets\Widget
+class ActiveForm extends \yii\widgets\ActiveForm
 {
     /**
      * @var string the default field class name when calling [[field()]] to create a new field.

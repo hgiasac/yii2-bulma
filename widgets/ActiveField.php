@@ -8,7 +8,7 @@ namespace bulma\widgets;
  * For more details and usage information on ActiveField, see the [guide article on forms](guide:input-forms).
  *
  */
-class ActiveField extends yii\widgets\ActiveField
+class ActiveField extends \yii\widgets\ActiveField
 {
 
   /**
