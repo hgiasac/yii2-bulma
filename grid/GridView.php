@@ -1,7 +1,7 @@
 <?php
 namespace bulma\grid;
 
-class GridView extends yii\grid\GridView
+class GridView extends \yii\grid\GridView
 {
 
 

@@ -2,7 +2,7 @@
 
 namespace bulma\grid;
 
-class DataColumn extends yii\grid\DataColumn
+class DataColumn extends \yii\grid\DataColumn
 {
 
   /**
