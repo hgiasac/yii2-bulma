@@ -114,4 +114,27 @@ class Html extends \yii\helpers\BaseHtml
       $selectOptions = static::renderSelectOptions($selection, $items, $options);
       return '<span class="select">' . static::tag('select', "\n" . $selectOptions . "\n", $options) . '</span>';
   }
+
+  /**
+   * Generates an input type of the given type.
+   * @param string $type the type attribute.
+   * @param string $name the name attribute. If it is null, the name attribute will not be generated.
+   * @param string $value the value attribute. If it is null, the value attribute will not be generated.
+   * @param array $options the tag options in terms of name-value pairs. These will be rendered as
+   * the attributes of the resulting tag. The values will be HTML-encoded using [[encode()]].
+   * If a value is null, the corresponding attribute will not be rendered.
+   * See [[renderTagAttributes()]] for details on how attributes are being rendered.
+   * @return string the generated input tag
+   */
+  public static function input($type, $name = null, $value = null, $options = [])
+  {
+      if (!isset($options['type'])) {
+          $options['type'] = $type;
+      }
+      $options['name'] = $name;
+      $options['value'] = $value === null ? null : (string) $value;
+
+      $options['class'] = 'input' + (isset($options['class']) ? ' ' . $options['class'] : '');
+      return static::tag('input', '', $options);
+  }
 }
