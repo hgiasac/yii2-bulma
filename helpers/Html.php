@@ -134,7 +134,7 @@ class Html extends \yii\helpers\BaseHtml
       $options['name'] = $name;
       $options['value'] = $value === null ? null : (string) $value;
 
-      $options['class'] = 'input' + (isset($options['class']) ? ' ' . $options['class'] : '');
+      $options['class'] = 'input' . (isset($options['class']) ? ' ' . $options['class'] : '');
       return static::tag('input', '', $options);
   }
 }
