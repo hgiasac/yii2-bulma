@@ -116,25 +116,128 @@ class Html extends \yii\helpers\BaseHtml
   }
 
   /**
-   * Generates an input type of the given type.
-   * @param string $type the type attribute.
-   * @param string $name the name attribute. If it is null, the name attribute will not be generated.
+   * Generates a text input field.
+   * @param string $name the name attribute.
    * @param string $value the value attribute. If it is null, the value attribute will not be generated.
    * @param array $options the tag options in terms of name-value pairs. These will be rendered as
    * the attributes of the resulting tag. The values will be HTML-encoded using [[encode()]].
    * If a value is null, the corresponding attribute will not be rendered.
    * See [[renderTagAttributes()]] for details on how attributes are being rendered.
+   * @return string the generated text input tag
+   */
+  public static function textInput($name, $value = null, $options = [])
+  {
+      $options['class'] = 'input' . (isset($options['class']) ? ' ' . $options['class'] : '');
+      return static::input('text', $name, $value, $options);
+  }
+
+  /**
+   * Generates a number input field.
+   * @param string $name the name attribute.
+   * @param string $value the value attribute. If it is null, the value attribute will not be generated.
+   * @param array $options the tag options in terms of name-value pairs. These will be rendered as
+   * the attributes of the resulting tag. The values will be HTML-encoded using [[encode()]].
+   * If a value is null, the corresponding attribute will not be rendered.
+   * See [[renderTagAttributes()]] for details on how attributes are being rendered.
+   * @return string the generated text input tag
+   */
+  public static function numberInput($name, $value = null, $options = [])
+  {
+      $options['class'] = 'input' . (isset($options['class']) ? ' ' . $options['class'] : '');
+      return static::input('number', $name, $value, $options);
+  }
+
+  /**
+   * Generates a password input field.
+   * @param string $name the name attribute.
+   * @param string $value the value attribute. If it is null, the value attribute will not be generated.
+   * @param array $options the tag options in terms of name-value pairs. These will be rendered as
+   * the attributes of the resulting tag. The values will be HTML-encoded using [[encode()]].
+   * If a value is null, the corresponding attribute will not be rendered.
+   * See [[renderTagAttributes()]] for details on how attributes are being rendered.
+   * @return string the generated password input tag
+   */
+  public static function passwordInput($name, $value = null, $options = [])
+  {
+      $options['class'] = 'input' . (isset($options['class']) ? ' ' . $options['class'] : '');
+      return static::input('password', $name, $value, $options);
+  }
+
+
+    /**
+     * Generates a text input tag for the given model attribute.
+     * This method will generate the "name" and "value" tag attributes automatically for the model attribute
+     * unless they are explicitly specified in `$options`.
+     * @param Model $model the model object
+     * @param string $attribute the attribute name or expression. See [[getAttributeName()]] for the format
+     * about attribute expression.
+     * @param array $options the tag options in terms of name-value pairs. These will be rendered as
+     * the attributes of the resulting tag. The values will be HTML-encoded using [[encode()]].
+     * See [[renderTagAttributes()]] for details on how attributes are being rendered.
+     * The following special options are recognized:
+     *
+     * - maxlength: integer|boolean, when `maxlength` is set true and the model attribute is validated
+     *   by a string validator, the `maxlength` option will take the value of [[\yii\validators\StringValidator::max]].
+     *   This is available since version 2.0.3.
+     *
+     * @return string the generated input tag
+     */
+    public static function activeTextInput($model, $attribute, $options = [])
+    {
+        self::normalizeMaxLength($model, $attribute, $options);
+        $options['class'] = 'input' . (isset($options['class']) ? ' ' . $options['class'] : '');
+        return static::activeInput('text', $model, $attribute, $options);
+    }
+
+
+  /**
+   * Generates a number input tag for the given model attribute.
+   * This method will generate the "name" and "value" tag attributes automatically for the model attribute
+   * unless they are explicitly specified in `$options`.
+   * @param Model $model the model object
+   * @param string $attribute the attribute name or expression. See [[getAttributeName()]] for the format
+   * about attribute expression.
+   * @param array $options the tag options in terms of name-value pairs. These will be rendered as
+   * the attributes of the resulting tag. The values will be HTML-encoded using [[encode()]].
+   * See [[renderTagAttributes()]] for details on how attributes are being rendered.
+   * The following special options are recognized:
+   *
+   * - maxlength: integer|boolean, when `maxlength` is set true and the model attribute is validated
+   *   by a string validator, the `maxlength` option will take the value of [[\yii\validators\StringValidator::max]].
+   *   This is available since version 2.0.3.
+   *
    * @return string the generated input tag
    */
-  public static function input($type, $name = null, $value = null, $options = [])
+  public static function activeNumberInput($model, $attribute, $options = [])
   {
-      if (!isset($options['type'])) {
-          $options['type'] = $type;
-      }
-      $options['name'] = $name;
-      $options['value'] = $value === null ? null : (string) $value;
-
+      self::normalizeMaxLength($model, $attribute, $options);
       $options['class'] = 'input' . (isset($options['class']) ? ' ' . $options['class'] : '');
-      return static::tag('input', '', $options);
+      return static::activeInput('number', $model, $attribute, $options);
   }
+
+
+    /**
+     * Generates a password input tag for the given model attribute.
+     * This method will generate the "name" and "value" tag attributes automatically for the model attribute
+     * unless they are explicitly specified in `$options`.
+     * @param Model $model the model object
+     * @param string $attribute the attribute name or expression. See [[getAttributeName()]] for the format
+     * about attribute expression.
+     * @param array $options the tag options in terms of name-value pairs. These will be rendered as
+     * the attributes of the resulting tag. The values will be HTML-encoded using [[encode()]].
+     * See [[renderTagAttributes()]] for details on how attributes are being rendered.
+     * The following special options are recognized:
+     *
+     * - maxlength: integer|boolean, when `maxlength` is set true and the model attribute is validated
+     *   by a string validator, the `maxlength` option will take the value of [[\yii\validators\StringValidator::max]].
+     *   This option is available since version 2.0.6.
+     *
+     * @return string the generated input tag
+     */
+    public static function activePasswordInput($model, $attribute, $options = [])
+    {
+        self::normalizeMaxLength($model, $attribute, $options);
+        $options['class'] = 'input' . (isset($options['class']) ? ' ' . $options['class'] : '');
+        return static::activeInput('password', $model, $attribute, $options);
+    }
 }

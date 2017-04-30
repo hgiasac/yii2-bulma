@@ -129,8 +129,35 @@ class ActiveField extends \yii\widgets\ActiveField
     }
 
     /**
-     * Renders an input tag.
-     * @param string $type the input type (e.g. `text`, `password`)
+     * Renders a text input.
+     * This method will generate the `name` and `value` tag attributes automatically for the model attribute
+     * unless they are explicitly specified in `$options`.
+     * @param array $options the tag options in terms of name-value pairs. These will be rendered as
+     * the attributes of the resulting tag. The values will be HTML-encoded using [[Html::encode()]].
+     *
+     * The following special options are recognized:
+     *
+     * - `maxlength`: int|bool, when `maxlength` is set `true` and the model attribute is validated
+     *   by a string validator, the `maxlength` option will take the value of [[\yii\validators\StringValidator::max]].
+     *   This is available since version 2.0.3.
+     *
+     * Note that if you set a custom `id` for the input element, you may need to adjust the value of [[selectors]] accordingly.
+     *
+     * @return $this the field object itself.
+     */
+    public function numberInput($options = [])
+    {
+        $options = array_merge($this->inputOptions, $options);
+        $this->addAriaAttributes($options);
+        $this->adjustLabelFor($options);
+        $this->parts['{input}'] = Html::activeNumberInput($this->model, $this->attribute, $options);
+        return $this;
+    }
+
+    /**
+     * Renders a password input.
+     * This method will generate the `name` and `value` tag attributes automatically for the model attribute
+     * unless they are explicitly specified in `$options`.
      * @param array $options the tag options in terms of name-value pairs. These will be rendered as
      * the attributes of the resulting tag. The values will be HTML-encoded using [[Html::encode()]].
      *
@@ -138,12 +165,12 @@ class ActiveField extends \yii\widgets\ActiveField
      *
      * @return $this the field object itself.
      */
-    public function input($type, $options = [])
+    public function passwordInput($options = [])
     {
         $options = array_merge($this->inputOptions, $options);
         $this->addAriaAttributes($options);
         $this->adjustLabelFor($options);
-        $this->parts['{input}'] = Html::activeInput($type, $this->model, $this->attribute, $options);
+        $this->parts['{input}'] = Html::activePasswordInput($this->model, $this->attribute, $options);
         return $this;
     }
 }
