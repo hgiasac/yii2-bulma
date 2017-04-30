@@ -184,9 +184,8 @@ class Html extends \yii\helpers\BaseHtml
      */
     public static function activeTextInput($model, $attribute, $options = [])
     {
-        self::normalizeMaxLength($model, $attribute, $options);
         $options['class'] = 'input' . (isset($options['class']) ? ' ' . $options['class'] : '');
-        return static::activeInput('text', $model, $attribute, $options);
+        return parent::activeInput('text', $model, $attribute, $options);
     }
 
 
@@ -210,9 +209,8 @@ class Html extends \yii\helpers\BaseHtml
    */
   public static function activeNumberInput($model, $attribute, $options = [])
   {
-      self::normalizeMaxLength($model, $attribute, $options);
       $options['class'] = 'input' . (isset($options['class']) ? ' ' . $options['class'] : '');
-      return static::activeInput('number', $model, $attribute, $options);
+      return parent::activeInput('number', $model, $attribute, $options);
   }
 
 
@@ -236,8 +234,7 @@ class Html extends \yii\helpers\BaseHtml
      */
     public static function activePasswordInput($model, $attribute, $options = [])
     {
-        self::normalizeMaxLength($model, $attribute, $options);
         $options['class'] = 'input' . (isset($options['class']) ? ' ' . $options['class'] : '');
-        return static::activeInput('password', $model, $attribute, $options);
+        return parent::activeInput('password', $model, $attribute, $options);
     }
 }
