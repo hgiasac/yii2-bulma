@@ -237,4 +237,28 @@ class Html extends \yii\helpers\BaseHtml
         $options['class'] = 'input' . (isset($options['class']) ? ' ' . $options['class'] : '');
         return parent::activeInput('password', $model, $attribute, $options);
     }
+
+    /**
+     * Generates a text area input.
+     * @param string $name the input name
+     * @param string $value the input value. Note that it will be encoded using [[encode()]].
+     * @param array $options the tag options in terms of name-value pairs. These will be rendered as
+     * the attributes of the resulting tag. The values will be HTML-encoded using [[encode()]].
+     * If a value is null, the corresponding attribute will not be rendered.
+     * See [[renderTagAttributes()]] for details on how attributes are being rendered.
+     * The following special options are recognized:
+     *
+     * - `doubleEncode`: whether to double encode HTML entities in `$value`. If `false`, HTML entities in `$value` will not
+     *   be further encoded. This option is available since version 2.0.11.
+     *
+     * @return string the generated text area tag
+     */
+    public static function textarea($name, $value = '', $options = [])
+    {
+        $options['name'] = $name;
+        $options['class'] = 'textarea' . (isset($options['class']) ? ' ' . $options['class'] : '');
+        $doubleEncode = ArrayHelper::remove($options, 'doubleEncode', true);
+
+        return static::tag('textarea', static::encode($value, $doubleEncode), $options);
+    }
 }
