@@ -2,6 +2,8 @@
 
 namespace bulma\helpers;
 
+use \yii\helpers\ArrayHelper;
+
 /**
  * BaseHtml provides concrete implementation for [[Html]].
  */
